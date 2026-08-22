@@ -48,7 +48,6 @@
                 true,
             );
         </script>
-        <script defer="" src="/static/js/bundle.js"></script>
         <script>
             if (window.self !== window.top) {
                 var s = document.createElement("script");
@@ -3519,6 +3518,97 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
             /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9BcHAuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHVDQUF1QyIsInNvdXJjZXNDb250ZW50IjpbIi8qIEFwcC1sZXZlbCBzdHlsZXMgbGl2ZSBpbiBpbmRleC5jc3MgKi9cbiJdLCJzb3VyY2VSb290IjoiIn0= */
         </style>
+        <style>
+            /* Production overrides for the exported static page. */
+            [data-testid="hero-section"] > div[aria-hidden="true"] {
+                transform: none !important;
+            }
+
+            [data-testid="hero-section"] > div.relative {
+                opacity: 1 !important;
+            }
+
+            [data-testid="product-catalogue"] article img {
+                box-sizing: border-box;
+                height: clamp(24rem, 55vw, 38rem) !important;
+                padding: 1rem;
+                object-fit: contain !important;
+                background: #f5f1e7;
+            }
+
+            [data-testid="product-catalogue"] article a[href*="wa.me"] {
+                min-height: 48px;
+                justify-content: center;
+                background: #263523;
+                color: #fdfcf0;
+                box-shadow: 0 8px 22px rgb(38 53 35 / 18%);
+            }
+
+            [data-testid="hero-whatsapp-btn"] {
+                border-color: #fdfcf0 !important;
+                background: rgb(38 53 35 / 78%) !important;
+                color: #fdfcf0 !important;
+            }
+
+            @media (max-width: 639px) {
+                header > div {
+                    padding: 0.8rem 1.25rem !important;
+                }
+
+                [data-testid="header-order-whatsapp-btn"] {
+                    min-height: 44px;
+                    padding-inline: 1rem;
+                }
+
+                [data-testid="hero-section"] {
+                    min-height: 100svh;
+                }
+
+                [data-testid="hero-section"] > div[aria-hidden="true"] img {
+                    height: 100% !important;
+                    object-position: 58% center;
+                }
+
+                [data-testid="hero-section"] > div.relative {
+                    padding: 7.5rem 1.25rem 3rem !important;
+                }
+
+                [data-testid="hero-section"] h1 {
+                    font-size: clamp(2.8rem, 14vw, 4rem);
+                }
+
+                [data-testid="hero-section"] p {
+                    max-width: 22rem;
+                }
+
+                [data-testid="hero-section"] div.mt-12 {
+                    width: 100%;
+                    gap: 0.75rem;
+                    margin-top: 2rem;
+                }
+
+                [data-testid="hero-section"] div.mt-12 > a {
+                    width: 100%;
+                    min-height: 52px;
+                    justify-content: center;
+                    padding-inline: 1.25rem;
+                    text-align: center;
+                }
+
+                [data-testid="product-catalogue"] {
+                    padding: 5rem 1.25rem;
+                }
+
+                [data-testid="product-catalogue"] article img {
+                    height: min(118vw, 31rem) !important;
+                    padding: 0.75rem;
+                }
+
+                [data-testid="product-catalogue"] article a[href*="wa.me"] {
+                    width: 100%;
+                }
+            }
+        </style>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -3720,7 +3810,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                             x-component="div"
                             x-id="Hero_16_6"
                             x-dynamic="false"
-                            style="transform: translateY(22%)"
+                            style="transform: none"
                         >
                             <img
                                 alt=""
@@ -3760,7 +3850,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                             x-component="div"
                             x-id="Hero_26_6"
                             x-dynamic="false"
-                            style="opacity: 0.15"
+                            style="opacity: 1"
                         >
                             <p
                                 data-testid="hero-eyebrow"
@@ -8382,73 +8472,5 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
                 </main>
             </div>
         </div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-        <script>
-            (function () {
-                function c() {
-                    var b =
-                        a.contentDocument ||
-                        (a.contentWindow && a.contentWindow.document);
-                    if (b) {
-                        var d = b.createElement("script");
-                        d.innerHTML =
-                            "window.__CF$cv$params={r:'a2f0612f594a40b1',t:'MTc4NzM4NjAwMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-                        b.getElementsByTagName("head")[0].appendChild(d);
-                    }
-                }
-                if (document.body) {
-                    var a = document.createElement("iframe");
-                    a.height = 1;
-                    a.width = 1;
-                    a.style.position = "absolute";
-                    a.style.top = 0;
-                    a.style.left = 0;
-                    a.style.border = "none";
-                    a.style.visibility = "hidden";
-                    document.body.appendChild(a);
-                    if ("loading" !== document.readyState) c();
-                    else if (window.addEventListener)
-                        document.addEventListener("DOMContentLoaded", c);
-                    else {
-                        var e = document.onreadystatechange || function () {};
-                        document.onreadystatechange = function (b) {
-                            e(b);
-                            "loading" !== document.readyState &&
-                                ((document.onreadystatechange = e), c());
-                        };
-                    }
-                }
-            })();
-        </script>
-        <iframe
-            height="1"
-            width="1"
-            style="
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                border-width: medium;
-                border-style: none;
-                border-color: currentcolor;
-                border-image: none;
-                visibility: hidden;
-            "
-        ></iframe>
-        <script
-            type="module"
-            src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496"
-            integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ=="
-            data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a"}'
-            crossorigin="anonymous"
-        ></script>
     </body>
 </html>
