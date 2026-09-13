@@ -25,16 +25,27 @@
   function message(cart, catalog, customer) {
     const items = lines(cart, catalog);
     if (!items.length) throw new Error('Your cart is empty.');
+    const subtotal = items.reduce((sum, item) => sum + item.total, 0);
+    const address = clean(customer.address);
+    const locality = [clean(customer.city), clean(customer.state)].filter(Boolean).join(', ');
+    const pin = clean(customer.pincode);
     return [
-      'Hello Hardev! I would like to request this order:', '',
-      ...items.map((item, i) => `${i + 1}. ${item.name} — ${item.label}\n   ${item.quantity} × ₹${item.price} = ₹${item.total}`), '',
-      `Product subtotal: ₹${items.reduce((sum, item) => sum + item.total, 0)}`,
-      'Delivery charges and final total: please confirm.', '',
-      `Name: ${clean(customer.name)}`, `Phone: ${clean(customer.phone)}`,
-      `Delivery address: ${clean(customer.address)}`,
-      `${clean(customer.city)}, ${clean(customer.state)} — ${clean(customer.pincode)}`,
+      'Hello Hardev! 👋',
+      "I'd like to place an order:", '',
+      '*ORDER SUMMARY*',
+      ...items.map((item, i) => `${i + 1}. ${item.name} — ${item.label}\n   Qty: ${item.quantity} × ₹${item.price} = ₹${item.total}`), '',
+      `*PRODUCT SUBTOTAL: ₹${subtotal}*`,
+      'Delivery charges: Please confirm',
+      'Final total: Please confirm', '',
+      '*DELIVERY DETAILS*',
+      `Name: ${clean(customer.name)}`,
+      `Phone: ${clean(customer.phone)}`,
+      `Address: ${address}`,
+      ...(locality || pin ? [`${locality}${locality && pin ? ' — ' : ''}${pin}`] : []),
       ...(clean(customer.notes) ? [`Notes: ${clean(customer.notes)}`] : []), '',
-      'Please confirm availability and the final total, then share a payment link or UPI QR code. This is an order request; payment has not been made.'
+      '*PAYMENT*',
+      'Please confirm product availability and the final total, then share a payment link or UPI QR code.',
+      'Payment is pending; this is an order request only.'
     ].join('\n');
   }
   const api = {restore, lines, message};

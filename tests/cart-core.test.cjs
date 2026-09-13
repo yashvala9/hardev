@@ -12,7 +12,7 @@ test('different sizes remain separate and client-supplied prices are ignored',()
 });
 test('WhatsApp message includes items, delivery and pending payment without inventing shipping',()=>{
  const text=cart.message([{id:'soap',variant:0,quantity:3}],catalog,{name:'Test Customer',phone:'9876543210',address:'12 Test Road\nNear Park',city:'Surat',state:'Gujarat',pincode:'395001',notes:'Call first'});
- assert.match(text,/3 × ₹40 = ₹120/);assert.match(text,/Product subtotal: ₹120/);assert.match(text,/12 Test Road Near Park/);assert.match(text,/payment has not been made/);assert.match(text,/Delivery charges and final total: please confirm/);
+ assert.match(text,/Qty: 3 × ₹40 = ₹120/);assert.match(text,/\*PRODUCT SUBTOTAL: ₹120\*/);assert.match(text,/Address: 12 Test Road Near Park/);assert.match(text,/Payment is pending; this is an order request only/);assert.match(text,/Delivery charges: Please confirm/);assert.match(text,/\*PAYMENT\*/);
  const url=new URL('https://wa.me/918866993501?text='+encodeURIComponent(text));assert.equal(url.searchParams.get('text'),text);
 });
 test('empty cart cannot produce an order request',()=>{assert.throws(()=>cart.message([],catalog,{}),/empty/);});
