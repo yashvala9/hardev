@@ -37,7 +37,11 @@ test('cart through delivery and review produces correct WhatsApp request without
  const data={name:'Test Customer',phone:'9876543210',address:'Test address',city:'Surat',state:'Gujarat',pincode:'395001',notes:'Call first'};
  for(const [key,value] of Object.entries(data))form.elements[key].value=value;
  assert.equal(form.checkValidity(),true);
- form.elements.phone.value='+91 9876543210';assert.equal(form.checkValidity(),true);
+ assert.equal(d.querySelector('.hc-phone-prefix').textContent,'+91');
+ assert.equal(form.elements.phone.maxLength,10);
+ form.elements.phone.value='+91 9876543210';assert.equal(form.checkValidity(),false);
+ form.elements.phone.value='98765432101';assert.equal(form.checkValidity(),false);
+ form.elements.phone.value='98a76-54321099';form.elements.phone.dispatchEvent(new w.Event('input'));assert.equal(form.elements.phone.value,'9876543210');assert.equal(form.checkValidity(),true);
  form.elements.phone.value='123';assert.equal(form.checkValidity(),false);form.elements.phone.value=data.phone;
  form.dispatchEvent(new w.Event('submit',{bubbles:true,cancelable:true}));
  assert.equal(d.querySelector('#hc-final-view').hidden,false);
@@ -45,7 +49,7 @@ test('cart through delivery and review produces correct WhatsApp request without
  assert.equal(d.querySelectorAll('.hc-review-item').length,2);
  d.querySelector('#hc-send').click();assert.equal(opened.length,1);
  const url=new URL(opened[0][0]);assert.equal(url.pathname,'/918866993501');
- assert.match(url.searchParams.get('text'),/2 × ₹139 = ₹278/);assert.match(url.searchParams.get('text'),/Product subtotal: ₹318/);
+ assert.match(url.searchParams.get('text'),/2 × ₹139 = ₹278/);assert.match(url.searchParams.get('text'),/Product subtotal: ₹318/);assert.match(url.searchParams.get('text'),/Phone: \+91 9876543210/);
  assert.equal(JSON.parse(w.localStorage.getItem('hardev-cart-v1')).length,2);
  assert.equal(w.localStorage.getItem('hardev-cart-v1').includes('Test Customer'),false);
  assert.equal(d.querySelector('#hc-message').value,url.searchParams.get('text'));
